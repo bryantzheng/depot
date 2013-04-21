@@ -1,4 +1,9 @@
 /* "cart" is the id of div. Display the instance value of @cart through JQuery's HTML method */
+
+// blind down
+if ($('#cart tr').length == 1) { $('#cart').show('blind', 1000); }
+
+// display cart using AJAX
 $("#cart").html("<%= escape_javascript render(@cart) %>")
 
 // 同时增加 //= require jquery-ui 在 application.js 中以实现动画效果
