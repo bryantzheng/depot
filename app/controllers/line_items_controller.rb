@@ -47,10 +47,16 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       if @line_item.save
         format.html { redirect_to(store_url)}
+        # 这里添加format.js 表示得到一个.js格式的回复, 后面大括号的可以不要，是后面例子用使用的
+        format.js   { @current_item = @line_item }
+        #format.js { render :layout => false }
         format.xml { render :xml => @line_item, :status => :created, :location => @line_item }
+        format.json { render json: @line_item, status: :created, location: @line_item }
       else
         format.html { render action: "new" }
+        #format.js { render :layout => false, :status => 406 }
         format.xml { render xml: @line_item.errors, status: :unprocessable_entity }
+        format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
     end
   end
